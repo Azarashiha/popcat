@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>画像入れ替え</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        #clickCounter {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        img {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="clickCounter">クリック数: 0</div>
+    <img id="switchImage" src="Popcat png.png" alt="Popcat" width="200">
+
+    <script>
+        let clicks = 0;
+        const image1 = "Popcat png.png";
+        const image2 = "Popcat Wow png.png";
+        const switchImageElement = document.getElementById("switchImage");
+
+        switchImageElement.addEventListener('mousedown', function() {
+            switchImageElement.setAttribute("src", image2);
+            clicks++;
+            document.getElementById("clickCounter").textContent = "クリック数: " + clicks;
+        });
+
+        switchImageElement.addEventListener('mouseup', function() {
+            switchImageElement.setAttribute("src", image1);
+        });
+
+        // ウィンドウの外でマウスを離した場合も対応
+        window.addEventListener('mouseup', function() {
+            switchImageElement.setAttribute("src", image1);
+        });
+    </script>
+</body>
+</html>
