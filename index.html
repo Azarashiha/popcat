@@ -32,20 +32,29 @@
         const image2 = "Popcat Wow png.png";
         const switchImageElement = document.getElementById("switchImage");
 
-        switchImageElement.addEventListener('mousedown', function() {
+        function onPress() {
             switchImageElement.setAttribute("src", image2);
             clicks++;
             document.getElementById("clickCounter").textContent = "クリック数: " + clicks;
-        });
+        }
 
-        switchImageElement.addEventListener('mouseup', function() {
+        function onRelease() {
             switchImageElement.setAttribute("src", image1);
+        }
+
+        // マウスイベント
+        switchImageElement.addEventListener('mousedown', onPress);
+        switchImageElement.addEventListener('mouseup', onRelease);
+
+        // タッチイベント（スマホ対応）
+        switchImageElement.addEventListener('touchstart', function(event) {
+            onPress();
+            event.preventDefault(); // デフォルトのスクロールやズーム動作を防ぐ
         });
+        switchImageElement.addEventListener('touchend', onRelease);
 
         // ウィンドウの外でマウスを離した場合も対応
-        window.addEventListener('mouseup', function() {
-            switchImageElement.setAttribute("src", image1);
-        });
+        window.addEventListener('mouseup', onRelease);
     </script>
 </body>
 </html>
